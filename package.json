@@ -1,0 +1,23 @@
+{
+  "name": "forestry_globallandtrends",
+  "version": "1.0.0",
+  "description": "Forestry Global Land Trends Portal",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FENIX-Platform-Projects/Forestry_GlobalLandTrends.git"
+  },
+  "author": "Stefano Cudini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FENIX-Platform-Projects/Forestry_GlobalLandTrends/issues"
+  },
+  "homepage": "https://github.com/FENIX-Platform-Projects/Forestry_GlobalLandTrends#readme",
+  "dependencies": {
+    "leaflet": "~0.7.7",
+    "leaflet-panel-layers": "~2.6.0"
+  }
+}

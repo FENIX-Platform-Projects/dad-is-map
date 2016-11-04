@@ -1,0 +1,23 @@
+body {
+    background: #88a
+}
+h2 {
+    color: #eef;
+    margin: 0;
+}
+#map {
+    position: fixed;
+    top: 50px;
+    width:98%;
+    height: 90%;
+}
+.leaflet-panel-layers {
+    background: rgba(255,255,255,0.8);
+}
+.leaflet-panel-layers-overlays .leaflet-panel-layers-item {
+    border: 1px solid #ddd;
+}
+.leaflet-panel-layers-title {
+    text-transform: capitalize;
+    font-size: 1.25em;
+}
