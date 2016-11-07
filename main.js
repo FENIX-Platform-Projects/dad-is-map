@@ -48,8 +48,8 @@ require(['jquery','underscore','handlebars',
             console.log('zoom', this.getZoom() );
         });
 
-    L.control.panelLayers(null, Config.panel.overlay.layers, {
-        title: Config.panel.overlay.title,
+    L.control.panelLayers(null, Config.panel.categories.layers, {
+        title: Config.panel.categories.title,
         position: 'bottomleft',
         collapsibleGroups: true,
         compact: true
@@ -62,8 +62,8 @@ require(['jquery','underscore','handlebars',
         compact: true
     }).addTo(map);   
 
-    L.control.panelLayers(null, Config.panel.baselayers.layers, {
-        title: Config.panel.baselayers.title,
+    L.control.panelLayers(null, Config.panel.otherlayers.layers, {
+        title: Config.panel.otherlayers.title,
         position: 'topright',
         compact: true
     }).addTo(map);

@@ -1,6 +1,12 @@
 /*global define*/
 define({
-    
+    "panel_categories": "Categories",
+    "panel_rawlayers": "Raw Data",
+    "panel_otherlayers": "Other Layers",
+
+    "panel_rawpoints": "Points",
+    "panel_rawpolygons": "Polygons",
+
     "vc": "Vegetation Cover",
     "vc_tree": "Tree",
     "vc_shrub": "Shrub",

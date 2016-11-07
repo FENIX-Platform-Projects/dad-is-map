@@ -47,15 +47,15 @@ return {
         //"CartoDB World Midnight Commander": "https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png",
     panel: {
 
-        overlay: {
-            title: "Categories",
+        categories: {
+            title: i18n.panel_categories,
             layers: _.map(groups, function(layers, groupName) {
                 return {
-                    collapsed: true,                    
+                    collapsed: false,
                     group: i18n[ groupName ],
                     layers: _.map(layers, function(layerName, i) {
                         return {
-                            active: true,
+                            active: false,
                             name: i18n[ groupName+'_'+layerName ],
                             layer: {
                                 type: "tileLayer.wms",
@@ -75,10 +75,10 @@ return {
         },
 
         rawlayers: {
-            title: "Raw Data",
+            title: i18n.panel_rawlayers,
             layers: [
                 {
-                    name: "points",
+                    name: i18n.panel_rawpoints,
                     layer: {
                         type: "tileLayer.wms",
                         args: [ geoserverUrl, {
@@ -86,29 +86,29 @@ return {
                                 layers: workspace+':'+'global_land_trend',
                                 format: "image/png",
                                 transparent: true
+                            }
+                        ]
+                    }
+                },
+                {
+                    name: i18n.panel_rawpolygons,
+                    layer: {
+                        type: "tileLayer.wms",
+                        args: [ geoserverUrl, {
+                                styles: "all_borders",
+                                layers: workspace+':all',
+                                format: "image/png",
+                                transparent: true,
+                                opacity: 0.6
                             }
                         ]
                     }
                 }
-                //TODO border of polygons
-                /*,{
-                    name: "borders",
-                    layer: {
-                        type: "tileLayer.wms",
-                        args: [ geoserverUrl, {
-                                styles: "global_land_trend_all",
-                                layers: workspace+':'+'global_land_trend',
-                                format: "image/png",
-                                transparent: true
-                            }
-                        ]
-                    }
-                }*/
             ]
         },
 
-        baselayers: {
-            title: "Forestry Layers",
+        otherlayers: {
+            title: i18n.panel_otherlayers,
             layers: [
                 {
                     name: "Tree Cover 2000",
