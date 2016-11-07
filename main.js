@@ -15,23 +15,27 @@ require.config({
         'bootstrap':              FX_CDN+"bootstrap/3.3.7/js/bootstrap.min",
         'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet",
 
-        'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers"
+        'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers",
+
+        'config': "config/config",
+        'nls': "i18n",
     },
     shim: {
         'underscore': { exports: '_' },
         'bootstrap': ['jquery'],
-        'leaflet-panel': ['leaflet']
+        'leaflet-panel': ['leaflet'],
+        'config': ['i18n']
     }
 });
 
 require(['jquery','underscore','handlebars',
     'leaflet', 'leaflet-panel',
-    'config/config'
+    'config'
 ], function($, _, Handlebars,
     L, LeafletPanel,
     Config
 ) {
-    
+
     var map = L.map('map', {
     		center: L.latLng([42.4918,12.4992]),
             layers: L.tileLayer(Config.baselayer),
@@ -46,15 +50,23 @@ require(['jquery','underscore','handlebars',
 
     L.control.panelLayers(null, Config.panel.overlay.layers, {
         title: Config.panel.overlay.title,
-        position: 'topright',
+        position: 'bottomleft',
         collapsibleGroups: true,
         compact: true
     }).addTo(map);
-
-    L.control.panelLayers(null, Config.panel.base.layers, {
-        title: Config.panel.base.title,
+ 
+    L.control.panelLayers(null, Config.panel.rawlayers.layers, {
+        title: Config.panel.rawlayers.title,
         position: 'bottomright',
+        collapsibleGroups: true,
+        compact: true
+    }).addTo(map);   
+
+    L.control.panelLayers(null, Config.panel.baselayers.layers, {
+        title: Config.panel.baselayers.title,
+        position: 'topright',
         compact: true
     }).addTo(map);
+
 
 });

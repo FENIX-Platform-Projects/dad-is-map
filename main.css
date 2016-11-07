@@ -15,9 +15,8 @@ h2 {
     background: rgba(255,255,255,0.8);
 }
 .leaflet-panel-layers-overlays .leaflet-panel-layers-item {
-    border: 1px solid #ddd;
+    border: 1px solid #fff;
 }
 .leaflet-panel-layers-title {
-    text-transform: capitalize;
     font-size: 1.25em;
 }

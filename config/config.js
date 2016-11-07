@@ -1,5 +1,9 @@
 
-define(['underscore','i18n'], function(_, i18n) {
+define(['underscore','i18n!nls/panel'], function(_, i18n) {
+
+window.I18N = i18n;
+
+console.log('i18n', i18n);
 
 var workspace = "forestry",
     geoserverUrl= "http://fenix.fao.org:20900/geoserver/"+workspace+"/wms";
@@ -11,18 +15,18 @@ var groups = {
             'shrub',
             'palm',
             'bamboo',
-            'crop'
+            'crop',
         ],
         'lu': [
-            'wetland',
-            'forestland',
-            'otherland',
             'cropland',
+            'forestland',
+            'grassland',
+            'wetland',
             'settlement',
-            'grassland'
+            'otherland'
         ],
         'fc': [
-            'otherwoodedland',
+            'otherwoodedland',    
             'otherland',
             'forest',
             'inlandwaterbodies',
@@ -30,30 +34,29 @@ var groups = {
             'unknown'
         ]
     };
-/*
-"Positron": "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
-"Dark matter": "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-"Positron (lite)": "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
-"Dark matter (lite)": "http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png",
-"CartoDB World Antique": "https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png",
-"CartoDB World Eco": "https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png",
-"CartoDB World Flat Blue": "https://cartocdn_{s}.global.ssl.fastly.net/base-flatblue/{z}/{x}/{y}.png",
-"CartoDB World Midnight Commander": "https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png",
-*/
+
 return {
     baselayer: "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+        //"Positron": "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        //"Dark matter": "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        //"Positron (lite)": "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+        //"Dark matter (lite)": "http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png",
+        //"CartoDB World Antique": "https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png",
+        //"CartoDB World Eco": "https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png",
+        //"CartoDB World Flat Blue": "https://cartocdn_{s}.global.ssl.fastly.net/base-flatblue/{z}/{x}/{y}.png",
+        //"CartoDB World Midnight Commander": "https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png",
     panel: {
 
         overlay: {
-            title: "Land Use Categories",
+            title: "Categories",
             layers: _.map(groups, function(layers, groupName) {
                 return {
-                    group: groupName,
-                    collapsed: true,
+                    collapsed: true,                    
+                    group: i18n[ groupName ],
                     layers: _.map(layers, function(layerName, i) {
                         return {
                             active: true,
-                            name: layerName,
+                            name: i18n[ groupName+'_'+layerName ],
                             layer: {
                                 type: "tileLayer.wms",
                                 args: [ geoserverUrl, {
@@ -71,7 +74,7 @@ return {
             })
         },
 
-        rawdata: {
+        rawlayers: {
             title: "Raw Data",
             layers: [
                 {
@@ -104,8 +107,8 @@ return {
             ]
         },
 
-        base: {
-            title: 'Base Layers',
+        baselayers: {
+            title: "Forestry Layers",
             layers: [
                 {
                     name: "Tree Cover 2000",
