@@ -1,5 +1,10 @@
 
-define(['underscore','i18n!nls/panel'], function(_, i18n) {
+define([
+    'underscore',
+    'handlebars',
+    'i18n!nls/panel',
+    'text!src/html/popup.html'
+], function(_, Handlebars, i18n, popupTmpl) {
 
 window.I18N = i18n;
 
@@ -8,6 +13,14 @@ console.log('i18n', i18n);
 var workspace = "forestry",
     geoserverUrl= "http://fenix.fao.org:20900/geoserver/"+workspace+"/wms";
     //geoserverUrl= "http://fenix.fao.org/geoserver29/"+workspace+"/wms";
+
+//TODO var PopupTmpl = Handlebars(popupTmpl);
+var PopupTmpl = function(data) {
+    return _.compact(_.map(data, function(v, k) {
+        if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
+            return '<em>'+k+':</em> '+v;
+    })).join('<br>');
+};
 
 var groups = {
         'vc': [
@@ -18,16 +31,16 @@ var groups = {
             'crop',
         ],
         'lu': [
+            'otherland',
             'cropland',
             'forestland',
             'grassland',
             'wetland',
-            'settlement',
-            'otherland'
+            'settlement'
         ],
         'fc': [
+            'otherland',        
             'otherwoodedland',    
-            'otherland',
             'forest',
             'inlandwaterbodies',
             'otherlandwtreecover',
@@ -55,16 +68,21 @@ return {
                     group: i18n[ groupName ],
                     layers: _.map(layers, function(layerName, i) {
                         return {
-                            active: false,
+                            active: false,//!!i,
                             name: i18n[ groupName+'_'+layerName ],
                             layer: {
-                                type: "tileLayer.wms",
+                                //type: "tileLayer.wms",
+                                type: "tileLayer.betterWms",
                                 args: [ geoserverUrl, {
                                         styles: groupName+'_'+layerName,
                                         layers: workspace+':'+groupName+'_'+layerName,
-                                        format: "image/png",
+                                        format: "image/png8",
                                         transparent: true,
-                                        opacity: 0.6
+                                        opacity: 0.8,
+                                        zIndex: 1000+i,
+                                        formatPopup: function(data) {
+                                            return PopupTmpl(data);
+                                        }
                                     }
                                 ]
                             }
@@ -85,7 +103,8 @@ return {
                                 styles: "global_land_trend_all",
                                 layers: workspace+':'+'global_land_trend',
                                 format: "image/png",
-                                transparent: true
+                                transparent: true,
+                                zIndex: 10000
                             }
                         ]
                     }
@@ -99,7 +118,8 @@ return {
                                 layers: workspace+':all',
                                 format: "image/png",
                                 transparent: true,
-                                opacity: 0.6
+                                opacity: 0.6,
+                                zIndex: 20000
                             }
                         ]
                     }

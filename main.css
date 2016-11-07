@@ -1,22 +1,40 @@
 body {
-    background: #88a
+    background: #ddd
 }
 h2 {
-    color: #eef;
     margin: 0;
+    position: fixed;
+    top:10px;
+    left: 50px;
+    color: #000;
+    text-shadow: 1px 1px 1px #fff;
+    z-index: 20000
 }
 #map {
     position: fixed;
-    top: 50px;
-    width:98%;
-    height: 90%;
+    top: 0;
+    left:0;
+    right: 0;
+    bottom:0;
 }
 .leaflet-panel-layers {
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.6);
 }
 .leaflet-panel-layers-overlays .leaflet-panel-layers-item {
-    border: 1px solid #fff;
+    border: 1px solid transparent;
+    background: none;
+}
+.leaflet-panel-layers-group.collapsible .leaflet-panel-layers-icon:first-child {
+    font-size: 26px;
 }
 .leaflet-panel-layers-title {
-    font-size: 1.25em;
+    font-size: 14px;
+}
+
+.leaflet-popup-content {
+    line-height: 13px
+}
+
+.leaflet-popup-content em {
+    padding-right: 20px;
 }

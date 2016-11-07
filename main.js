@@ -16,6 +16,7 @@ require.config({
         'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet",
 
         'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers",
+        'leaflet-betterwms': "src/L.TileLayer.WMS",
 
         'config': "config/config",
         'nls': "i18n",
@@ -24,15 +25,16 @@ require.config({
         'underscore': { exports: '_' },
         'bootstrap': ['jquery'],
         'leaflet-panel': ['leaflet'],
+        'leaflet-betterwms': ['leaflet','jquery'],
         'config': ['i18n']
     }
 });
 
 require(['jquery','underscore','handlebars',
-    'leaflet', 'leaflet-panel',
+    'leaflet', 'leaflet-panel', 'leaflet-betterwms',
     'config'
 ], function($, _, Handlebars,
-    L, LeafletPanel,
+    L, LeafletPanel, LeafletBetterWMS,
     Config
 ) {
 
@@ -42,6 +44,7 @@ require(['jquery','underscore','handlebars',
             attributionControl: false,
             minZoom: 4,
             maxZoom: 8,
+            zommControl: false,
             zoom: 4
     	})
         .on('zoomend', function() {
@@ -50,23 +53,21 @@ require(['jquery','underscore','handlebars',
 
     L.control.panelLayers(null, Config.panel.categories.layers, {
         title: Config.panel.categories.title,
-        position: 'bottomleft',
+        position: 'topright',
         collapsibleGroups: true,
         compact: true
-    }).addTo(map);
- 
-    L.control.panelLayers(null, Config.panel.rawlayers.layers, {
-        title: Config.panel.rawlayers.title,
-        position: 'bottomright',
-        collapsibleGroups: true,
-        compact: true
-    }).addTo(map);   
+    }).addTo(map); 
 
     L.control.panelLayers(null, Config.panel.otherlayers.layers, {
         title: Config.panel.otherlayers.title,
-        position: 'topright',
+        position: 'bottomleft',
         compact: true
     }).addTo(map);
 
+    L.control.panelLayers(null, Config.panel.rawlayers.layers, {
+        title: Config.panel.rawlayers.title,
+        position: 'bottomleft',
+        compact: true
+    }).addTo(map);  
 
 });
