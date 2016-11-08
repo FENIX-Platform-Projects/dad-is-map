@@ -43,7 +43,7 @@ require(['jquery','underscore','handlebars',
             layers: L.tileLayer(Config.baselayer),
             attributionControl: false,
             minZoom: 4,
-            maxZoom: 8,
+            maxZoom: 7,
             zommControl: false,
             zoom: 4
     	})
@@ -56,6 +56,10 @@ require(['jquery','underscore','handlebars',
         position: 'topright',
         collapsibleGroups: true,
         compact: true
+    }).on('panel:selected', function(layer) {
+        
+        console.log( layer );
+
     }).addTo(map); 
 
     L.control.panelLayers(null, Config.panel.otherlayers.layers, {

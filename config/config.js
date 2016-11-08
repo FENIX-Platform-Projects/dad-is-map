@@ -6,10 +6,6 @@ define([
     'text!src/html/popup.html'
 ], function(_, Handlebars, i18n, popupTmpl) {
 
-window.I18N = i18n;
-
-console.log('i18n', i18n);
-
 var workspace = "forestry",
     geoserverUrl= "http://fenix.fao.org:20900/geoserver/"+workspace+"/wms";
     //geoserverUrl= "http://fenix.fao.org/geoserver29/"+workspace+"/wms";
@@ -31,20 +27,20 @@ var groups = {
             'crop',
         ],
         'lu': [
-            'otherland',
             'cropland',
             'forestland',
             'grassland',
             'wetland',
-            'settlement'
+            'settlement',
+            'otherland',            
         ],
         'fc': [
-            'otherland',        
-            'otherwoodedland',    
             'forest',
             'inlandwaterbodies',
             'otherlandwtreecover',
-            'unknown'
+            'unknown',
+            'otherland',  
+            'otherwoodedland',            
         ]
     };
 
@@ -79,7 +75,7 @@ return {
                                         format: "image/png8",
                                         transparent: true,
                                         opacity: 0.8,
-                                        zIndex: 1000+i,
+                                        zIndex: 100+i,
                                         formatPopup: function(data) {
                                             return PopupTmpl(data);
                                         }
