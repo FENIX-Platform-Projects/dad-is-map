@@ -84,14 +84,24 @@ return {
                     {
                         name: "Google Maps",
                         layer: new L.Google('ROADMAP')
-                    },                
+                    },
+                    {
+                        name: "Open Street Map",
+                        layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                        })
+                    },
                     {
                         active: true,
                         name: "CartoDB Positron",
                         layer: {
                             type: "tileLayer",
                             args: [
-                                "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
+                                "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png", {
+                                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                                    subdomains: 'abcd',
+                                    maxZoom: 19,
+                                }
                             ]
                         }
                     },
