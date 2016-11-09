@@ -26,6 +26,7 @@ h2 {
 }
 .leaflet-panel-layers-group.collapsible .leaflet-panel-layers-icon:first-child {
     font-size: 26px;
+    border: none;
 }
 .leaflet-panel-layers-title {
     font-size: 14px;
@@ -37,4 +38,20 @@ h2 {
 
 .leaflet-popup-content em {
     padding-right: 20px;
+}
+
+.leaflet-panel-layers-icon {
+    background: #eee;
+    border: 1px solid #ddd;
+    width: auto;
+    height: 16px;
+    padding: 0;
+    float: right;
+    overflow: hidden;
+}
+.layer-color {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    border: none
 }

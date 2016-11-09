@@ -7,27 +7,27 @@ var workspace = "forestry",
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
-            'tree',
-            'shrub',
-            'palm',
-            'bamboo',
-            'crop',
+            {name: 'tree',  colors: "#FFFFFF,#FFEEEE,#FFDDDD,#FFCCCC" },
+            {name: 'shrub', colors: "#EE0000" },
+        //    {name: 'palm',   colors: "" },
+        //    {name: 'bamboo', colors: "" },
+        //    {name: 'crop',   colors: "" },
         ],
         'lu': [
-            'cropland',
-            'forestland',
-            'grassland',
-            'wetland',
-            'settlement',
-            'otherland',            
+            {name: 'cropland',   colors: "#006600" },
+            {name: 'forestland', colors: "" },
+            {name: 'grassland',  colors: "" },
+            {name: 'wetland',    colors: "" },
+            {name: 'settlement', colors: "" },
+            {name: 'otherland',  colors: "" },            
         ],
         'fc': [
-            'forest',
-            'inlandwaterbodies',
-            'otherlandwtreecover',
-            'unknown',
-            'otherland',  
-            'otherwoodedland',            
+            {name: 'forest',     colors: "" },
+            {name: 'inlandwaterbodies',  colors: "" },
+            {name: 'otherlandwtreecover', colors: "" },
+        //  {name: 'unknown',    colors: "" },
+            {name: 'otherland',  colors: "" },  
+            {name: 'otherwoodedland',    colors: "" },            
         ]
     };
 
@@ -38,16 +38,16 @@ return {
             return {
                 collapsed: false,
                 group: i18n[ categoryName ],
-                layers: _.map(layers, function(layerName, i) {
+                layers: _.map(layers, function(layer, i) {
                     return {
                         active: false,//!!i,
-                        name: i18n[ categoryName+'_'+layerName ],
+                        name: i18n[ categoryName+'_'+layer.name ],
                         layer: {
                             //type: "tileLayer.wms",
                             type: "tileLayer.betterWms",//with GetCapabilities
                             args: [ geoserverUrl, {
-                                    styles: categoryName+'_'+layerName,
-                                    layers: workspace+':'+categoryName+'_'+layerName,
+                                    styles: categoryName+'_'+layer.name,
+                                    layers: workspace+':'+categoryName+'_'+layer.name,
                                     format: "image/png8",
                                     transparent: true,
                                     opacity: 0.8,
@@ -61,7 +61,10 @@ return {
                                     }
                                 }
                             ]
-                        }
+                        },
+                        icon: _.reduce(layer.colors.split(','), function(out, c) {
+                            return out+'<i class="layer-color" style="background:'+c+'"></i>';
+                        },'')
                     };
                 })
             };
