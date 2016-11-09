@@ -4,14 +4,6 @@ define(['underscore','handlebars','i18n!nls/panels','text!src/html/popup.html'
 var workspace = "forestry",
     geoserverUrl = "http://fenix.fao.org/geoserver29/ows";
 
-//TODO replace with: var PopupTmpl = Handlebars(popupTmpl);
-var PopupTmpl = function(data) {
-    return _.compact(_.map(data, function(v, k) {
-        if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
-            return '<em>'+k+':</em> '+v;
-    })).join('<br>');
-};
-
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
@@ -38,6 +30,14 @@ var groups = {
             'otherwoodedland',            
         ]
     };
+
+//TODO replace with: var PopupTmpl = Handlebars(popupTmpl);
+var PopupTmpl = function(data) {
+    return _.compact(_.map(data, function(v, k) {
+        if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
+            return '<em>'+k+':</em> '+v;
+    })).join('<br>');
+};
 
 return {
     categories: {
