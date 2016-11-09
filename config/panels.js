@@ -1,5 +1,7 @@
-define(['underscore','handlebars','i18n!nls/panels','text!src/html/popup.html'
-], function(_, Handlebars, i18n, popupTmpl) {
+define(['underscore','handlebars',
+    'leaflet-google','i18n!nls/panels','text!src/html/popup.html'
+], function(_, Handlebars,
+    LeafletGoogle, i18n, popupTmpl) {
 
 var workspace = "forestry",
     geoserverUrl = "http://fenix.fao.org/geoserver29/ows";
@@ -79,6 +81,10 @@ return {
                 collapsed: false,
                 collapsibleGroups: true,
                 layers: [
+                    {
+                        name: "Google Maps",
+                        layer: new L.Google('ROADMAP')
+                    },                
                     {
                         active: true,
                         name: "CartoDB Positron",

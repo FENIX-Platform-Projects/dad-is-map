@@ -14,6 +14,7 @@ require.config({
         'handlebars':             FX_CDN+"handlebars/4.0.5/handlebars.min",
         'bootstrap':              FX_CDN+"bootstrap/3.3.7/js/bootstrap.min",
         'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet",
+        'leaflet-google':         FX_CDN+"leaflet/plugins/Google",
 
         'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers",
         'leaflet-betterwms': "src/L.TileLayer.BetterWMS",
@@ -23,16 +24,17 @@ require.config({
     shim: {
         'underscore': { exports: '_' },
         'bootstrap': ['jquery'],
-        'leaflet-panel': ['leaflet'],
+        'leaflet-panel': ['leaflet'],        
+        'leaflet-google': ['leaflet'],
         'leaflet-betterwms': ['leaflet','jquery']
     }
 });
 
 require(['jquery','underscore','handlebars',
-    'leaflet', 'leaflet-panel', 'leaflet-betterwms',
+    'leaflet', 'leaflet-panel', 'leaflet-betterwms', 
     'config/panels'
 ], function($, _, Handlebars,
-    L, LeafletPanel, LeafletBetterWMS,
+    L, LeafletPanel, LeafletBetterWMS, 
     ConfigPanels
 ) {
 
