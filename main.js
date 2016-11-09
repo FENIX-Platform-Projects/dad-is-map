@@ -13,6 +13,7 @@ require.config({
         'underscore':             FX_CDN+"underscore/1.8.0/underscore.min",
         'handlebars':             FX_CDN+"handlebars/4.0.5/handlebars.min",
         'bootstrap':              FX_CDN+"bootstrap/3.3.7/js/bootstrap.min",
+        'ion-rangeslider':        FX_CDN+"ion.rangeSlider/2.1.2/js/ion-rangeSlider/ion.rangeSlider",
         'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet",
         'leaflet-google':         FX_CDN+"leaflet/plugins/Google",
 
@@ -24,24 +25,25 @@ require.config({
     shim: {
         'underscore': { exports: '_' },
         'bootstrap': ['jquery'],
+        'ion-rangeslider': ['jquery'],
         'leaflet-panel': ['leaflet'],        
         'leaflet-google': ['leaflet'],
         'leaflet-betterwms': ['leaflet','jquery']
     }
 });
 
-require(['jquery','underscore','handlebars',
+require(['jquery','underscore','handlebars', 'ion-rangeslider', 
     'leaflet', 'leaflet-panel', 'leaflet-betterwms', 
     'config/panels'
-], function($, _, Handlebars,
+], function($, _, Handlebars, Rangeslider,
     L, LeafletPanel, LeafletBetterWMS, 
     ConfigPanels
 ) {
 
     var map = L.map('map', {
-    		center: [42.4918,12.4992],
+    		center: [42,12],
             minZoom: 4,
-            maxZoom: 8,
+            maxZoom: 7,
             zoom: 4
     	})
         .on('zoomend', function() {
@@ -52,7 +54,24 @@ require(['jquery','underscore','handlebars',
         title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
-        compact: true
+        compact: true,
+        /*buildItem: function(item) {
+            
+            var $node = $('<label class="leaflet-panel-layers-title">'+item.name+'</label>');
+
+            $node.append('<input type="text" value="'+item.layer.options.opacity+'" />');
+            
+            
+
+            $node.find('input').ionRangeSlider({
+                min:0, max:1,
+                to: item.layer.options.opacity
+            });
+
+            console.log($node[0]);
+
+            return $node[0];
+        }*/
     }).on('panel:selected', function(layer) {
 
         console.log( layer );
