@@ -16,34 +16,31 @@ require.config({
         'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet",
 
         'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers",
-        'leaflet-betterwms': "src/L.TileLayer.WMS",
+        'leaflet-betterwms': "src/L.TileLayer.BetterWMS",
 
-        'config': "config/config",
         'nls': "i18n",
     },
     shim: {
         'underscore': { exports: '_' },
         'bootstrap': ['jquery'],
         'leaflet-panel': ['leaflet'],
-        'leaflet-betterwms': ['leaflet','jquery'],
-        'config': ['i18n']
+        'leaflet-betterwms': ['leaflet','jquery']
     }
 });
 
 require(['jquery','underscore','handlebars',
     'leaflet', 'leaflet-panel', 'leaflet-betterwms',
-    'config'
+    'config/panels'
 ], function($, _, Handlebars,
     L, LeafletPanel, LeafletBetterWMS,
-    Config
+    ConfigPanels
 ) {
 
     var map = L.map('map', {
-    		center: L.latLng([42.4918,12.4992]),
-            layers: L.tileLayer(Config.baselayer),
+    		center: [42.4918,12.4992],
             attributionControl: false,
             minZoom: 4,
-            maxZoom: 7,
+            maxZoom: 8,
             zommControl: false,
             zoom: 4
     	})
@@ -51,27 +48,22 @@ require(['jquery','underscore','handlebars',
             console.log('zoom', this.getZoom() );
         });
 
-    L.control.panelLayers(null, Config.panel.categories.layers, {
-        title: Config.panel.categories.title,
+    L.control.panelLayers(null, ConfigPanels.categories.layers, {
+        title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
         compact: true
     }).on('panel:selected', function(layer) {
-        
+
         console.log( layer );
 
-    }).addTo(map); 
-
-    L.control.panelLayers(null, Config.panel.otherlayers.layers, {
-        title: Config.panel.otherlayers.title,
-        position: 'bottomleft',
-        compact: true
     }).addTo(map);
 
-    L.control.panelLayers(null, Config.panel.rawlayers.layers, {
-        title: Config.panel.rawlayers.title,
+    L.control.panelLayers(ConfigPanels.baselayers.layers, ConfigPanels.rawlayers.layers, {
+        title: ConfigPanels.rawlayers.title,
         position: 'bottomleft',
+        collapsibleGroups: true,
         compact: true
-    }).addTo(map);  
+    }).addTo(map);      
 
 });

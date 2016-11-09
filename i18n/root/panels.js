@@ -1,8 +1,8 @@
 /*global define*/
 define({
     "panel_categories": "Categories",
-    "panel_rawlayers": "Raw Data",
-    "panel_otherlayers": "Other Layers",
+    "panel_baselayers": "Base Layers",
+    "panel_rawlayers": "Raw Data",    
 
     "panel_rawpoints": "Points",
     "panel_rawpolygons": "Polygons",
