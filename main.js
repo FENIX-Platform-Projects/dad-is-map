@@ -40,10 +40,8 @@ require(['jquery','underscore','handlebars',
 
     var map = L.map('map', {
     		center: [42.4918,12.4992],
-            attributionControl: false,
             minZoom: 4,
             maxZoom: 8,
-            zommControl: false,
             zoom: 4
     	})
         .on('zoomend', function() {

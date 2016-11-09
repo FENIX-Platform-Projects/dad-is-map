@@ -9,14 +9,14 @@ var workspace = "forestry",
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
-            {name: 'tree',  colors: "#FFFFFF,#FFEEEE,#FFDDDD,#FFCCCC" },
+            {name: 'tree',  colors: "#FFFFFF,#FFEEEE,#FFDDDD,#FFCCCC", active: true },
             {name: 'shrub', colors: "#EE0000" },
         //    {name: 'palm',   colors: "" },
         //    {name: 'bamboo', colors: "" },
         //    {name: 'crop',   colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   colors: "#006600" },
+            {name: 'cropland',   colors: "#006600", active: true },
             {name: 'forestland', colors: "" },
             {name: 'grassland',  colors: "" },
             {name: 'wetland',    colors: "" },
@@ -42,7 +42,7 @@ return {
                 group: i18n[ categoryName ],
                 layers: _.map(layers, function(layer, i) {
                     return {
-                        active: false,//!!i,
+                        active: layer.active || false,
                         name: i18n[ categoryName+'_'+layer.name ],
                         layer: {
                             //type: "tileLayer.wms",
@@ -88,7 +88,7 @@ return {
                     {
                         name: "Open Street Map",
                         layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         })
                     },
                     {
@@ -98,7 +98,7 @@ return {
                             type: "tileLayer",
                             args: [
                                 "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png", {
-                                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                                    attribution: '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                                     subdomains: 'abcd',
                                     maxZoom: 19,
                                 }
@@ -110,7 +110,11 @@ return {
                         layer: {
                             type: "tileLayer",
                             args: [
-                                "http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png"
+                                "http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png", {
+                                    attribution: '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+                                    subdomains: 'abcd',
+                                    maxZoom: 19,
+                                }
                             ]
                         }
                     }
