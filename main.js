@@ -14,7 +14,7 @@ require.config({
         'handlebars':             FX_CDN+"handlebars/4.0.5/handlebars.min",
         'bootstrap':              FX_CDN+"bootstrap/3.3.7/js/bootstrap.min",
         'ion-rangeslider':        FX_CDN+"ion.rangeSlider/2.1.2/js/ion-rangeSlider/ion.rangeSlider",
-        'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet",
+        'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet-src",
         'leaflet-google':         FX_CDN+"leaflet/plugins/Google",
 
         'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers",
@@ -50,16 +50,12 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
             console.log('zoom', this.getZoom() );
         });
 
-window.LL = {};
-
     L.control.panelLayers(null, ConfigPanels.categories.layers, {
         title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
         compact: true,
 /*        buildItem: function(item) {
-
-            LL[item.name]= item;
             
             var $node = $('<span class="">');
 
@@ -80,7 +76,7 @@ window.LL = {};
         }*/
     }).on('panel:selected', function(layer) {
 
-        console.log( layer );
+        console.log( layer.name );
 
     }).addTo(map);
 

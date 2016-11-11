@@ -2,6 +2,24 @@
 
 L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   
+  options: {    
+    formatPopup: null,
+  },
+
+  initialize: function(url, options) {
+    
+    L.TileLayer.WMS.prototype.initialize.call(this, url, options);
+    L.Util.setOptions(this, options || {});
+
+    this._formatPopup = this.options.formatPopup || this._defaultFormatPopup;
+    
+    console.log('wmsParams', this.wmsParams);
+  },
+
+  _defaultFormatPopup: function(data) {
+    return JSON.stringify(data);
+  },
+
   onAdd: function (map) {
 
     var self = this;
@@ -82,8 +100,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     
     if(_.isObject(data) && data.features && data.features.length) {
 
-      var props = data.features[0].properties,
-          content = this.wmsParams.formatPopup(props);
+      var content = this._formatPopup( data.features[0].properties );
 
       this._geoLayer.clearLayers();
       this._geoLayer.addData(data);
