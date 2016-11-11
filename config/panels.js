@@ -119,6 +119,7 @@ return {
                 collapsibleGroups: true,
                 layers: [
                     {
+                        active: true,
                         name: "Google Maps",
                         layer: new L.Google('ROADMAP')
                     },
@@ -133,7 +134,6 @@ return {
                         })
                     },
                     {
-                        active: true,
                         name: "CartoDB Light",
                         layer: {
                             type: "tileLayer",
