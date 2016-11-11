@@ -17,19 +17,19 @@ var groups = {
         ],
         'lu': [
             {name: 'cropland',   colors: "#504B10", active: true },
-            {name: 'forestland', colors: "336633" },
-            {name: 'grassland',  colors: "66ee66" },
-            {name: 'wetland',    colors: "6666ee" },
-            {name: 'settlement', colors: "1200FD" },
-            {name: 'otherland',  colors: "ffffff" },            
+            {name: 'forestland', colors: "#336633" },
+            {name: 'grassland',  colors: "#66ee66" },
+            {name: 'wetland',    colors: "#6666ee" },
+            {name: 'settlement', colors: "#1200FD" },
+            {name: 'otherland',  colors: "#ffffff" },            
         ],
         'fc': [
-            {name: 'forest',     colors: "336633" },
-            {name: 'inlandwaterbodies',  colors: "2DECE6" },
-            {name: 'otherlandwtreecover', colors: "89EB32" },
+            {name: 'forest',     colors: "#336633" },
+            {name: 'inlandwaterbodies',  colors: "#2DECE6" },
+            {name: 'otherlandwtreecover', colors: "#89EB32" },
         //  {name: 'unknown',    colors: "" },
-            {name: 'otherland',  colors: "ffffff" },  
-            {name: 'otherwoodedland',    colors: "A39813" },            
+            {name: 'otherland',  colors: "#ffffff" },  
+            {name: 'otherwoodedland',    colors: "#A39813" },            
         ]
     };
 
