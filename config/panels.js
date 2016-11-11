@@ -9,7 +9,7 @@ var workspace = "forestry",
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
-            {name: 'tree',  colors: "#FFFFFF,#FFEEEE,#FFDDDD,#FFCCCC", active: true },
+            {name: 'tree',  colors: "#FFFFFF,#FFEEEE,#FFDDDD,#FFCCCC" },
             {name: 'shrub', colors: "#EE0000" },
         //    {name: 'palm',   colors: "" },
         //    {name: 'bamboo', colors: "" },
@@ -52,8 +52,7 @@ return {
                                     layers: workspace+':'+categoryName+'_'+layer.name,
                                     format: "image/png8",
                                     transparent: true,
-                                    opacity: 0.8,
-                                    zIndex: 100+i,
+                                    opacity: 1,
                                     formatPopup: function(data) {
                                         //TODO replace with: return Handlebars(popupTmpl);
                                         return _.compact(_.map(data, function(v, k) {
@@ -73,6 +72,44 @@ return {
         })
     },
 
+    rawlayers: {
+        layers: [
+            {
+                group: i18n['panel_rawlayers'],
+                collapsed: true,
+                layers: [
+                    {
+                        name: i18n['panel_rawpoints'],
+                        layer: {
+                            type: "tileLayer.wms",
+                            args: [ geoserverUrl, {
+                                    styles: "global_land_trend_all",
+                                    layers: workspace+':'+'global_land_trend',
+                                    format: "image/png",
+                                    transparent: true,
+                                    attribution: i18n['attribution_raw']
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        name: i18n['panel_rawpolygons'],
+                        layer: {
+                            type: "tileLayer.wms",
+                            args: [ geoserverUrl, {
+                                    styles: "all_borders",
+                                    layers: workspace+':all',
+                                    format: "image/png",
+                                    transparent: true,
+                                    opacity: 0.6
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
 
     baselayers: {
         layers: [
@@ -86,6 +123,10 @@ return {
                         layer: new L.Google('ROADMAP')
                     },
                     {
+                        name: "Google Satellite",
+                        layer: new L.Google('SAT')
+                    },                    
+                    {
                         name: "Open Street Map",
                         layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -93,7 +134,7 @@ return {
                     },
                     {
                         active: true,
-                        name: "CartoDB Positron",
+                        name: "CartoDB Light",
                         layer: {
                             type: "tileLayer",
                             args: [
@@ -106,7 +147,7 @@ return {
                         }
                     },
                     {
-                        name: "CartoDB Dark matter",
+                        name: "CartoDB Dark",
                         layer: {
                             type: "tileLayer",
                             args: [
@@ -126,46 +167,6 @@ return {
                     //"CartoDB World Eco": "https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png",
                     //"CartoDB World Flat Blue": "https://cartocdn_{s}.global.ssl.fastly.net/base-flatblue/{z}/{x}/{y}.png",
                     //"CartoDB World Midnight Commander": "https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png",            
-                ]
-            }
-        ]
-    },
-
-    rawlayers: {
-        layers: [
-            {
-                group: i18n['panel_rawlayers'],
-                collapsed: true,
-                layers: [
-                    {
-                        name: i18n['panel_rawpoints'],
-                        layer: {
-                            type: "tileLayer.wms",
-                            args: [ geoserverUrl, {
-                                    styles: "global_land_trend_all",
-                                    layers: workspace+':'+'global_land_trend',
-                                    format: "image/png",
-                                    transparent: true,
-                                    zIndex: 10000
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        name: i18n['panel_rawpolygons'],
-                        layer: {
-                            type: "tileLayer.wms",
-                            args: [ geoserverUrl, {
-                                    styles: "all_borders",
-                                    layers: workspace+':all',
-                                    format: "image/png",
-                                    transparent: true,
-                                    opacity: 0.6,
-                                    zIndex: 20000
-                                }
-                            ]
-                        }
-                    }
                 ]
             }
         ]

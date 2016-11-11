@@ -17,20 +17,6 @@ h2 {
     right: 0;
     bottom:0;
 }
-.leaflet-panel-layers {
-    background: rgba(255,255,255,0.6);
-}
-.leaflet-panel-layers-overlays .leaflet-panel-layers-item {
-    border: 1px solid transparent;
-    background: none;
-}
-.leaflet-panel-layers-group.collapsible .leaflet-panel-layers-icon:first-child {
-    font-size: 26px;
-    border: none;
-}
-.leaflet-panel-layers-title {
-    font-size: 12px;
-}
 
 .leaflet-popup-content {
     line-height: 13px
@@ -38,6 +24,26 @@ h2 {
 
 .leaflet-popup-content em {
     padding-right: 20px;
+}
+
+/* PANELS */
+
+.leaflet-panel-layers {
+    background: rgba(255,255,255,0.6);
+}
+.leaflet-panel-layers-overlays .leaflet-panel-layers-item {
+    border: 1px solid transparent;
+    background: none;
+    min-width: 160px
+}
+.leaflet-panel-layers-group.collapsible .leaflet-panel-layers-icon:first-child {
+    font-size: 26px;
+    border: none;
+}
+.leaflet-panel-layers-title {
+    font-size: 12px;
+
+    display: block;
 }
 
 .leaflet-panel-layers-icon {
@@ -49,9 +55,17 @@ h2 {
     float: right;
     overflow: hidden;
 }
-.layer-color {
+.leaflet-panel-layers-item .layer-color {
     display: inline-block;
     height: 16px;
     width: 16px;
     border: none
+}
+
+.leaflet-panel-layers-item .irs-min, .irs-max {
+    display: none;
+}
+
+.leaflet-panel-layers-item .irs {
+    max-width: 80%
 }

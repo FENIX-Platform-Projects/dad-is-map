@@ -29,4 +29,6 @@ define({
     "fc_inlandwaterbodies": "Inland water bodies",
     "fc_otherlandwtreecover": "Other land w/tree cover",
     "fc_unknown": "Unknown",
+
+    "attribution_raw": "FAO Forestry"
 });

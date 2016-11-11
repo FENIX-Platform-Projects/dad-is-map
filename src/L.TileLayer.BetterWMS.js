@@ -82,14 +82,13 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     
     if(_.isObject(data) && data.features && data.features.length) {
 
-      var props = data.features[0].properties;
-
-      var content = this.wmsParams.formatPopup(props);
+      var props = data.features[0].properties,
+          content = this.wmsParams.formatPopup(props);
 
       this._geoLayer.clearLayers();
       this._geoLayer.addData(data);
 
-      L.popup({ maxWidth: 800})
+      L.popup({maxWidth: 800 })
         .setLatLng(latlng)
         .setContent(content)
         .openOn(this._map);

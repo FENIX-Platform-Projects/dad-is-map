@@ -50,25 +50,31 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
             console.log('zoom', this.getZoom() );
         });
 
+window.LL = {};
+
     L.control.panelLayers(null, ConfigPanels.categories.layers, {
         title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
         compact: true,
-        /*buildItem: function(item) {
-            
-            var $node = $('<label class="leaflet-panel-layers-title">'+item.name+'</label>');
+/*        buildItem: function(item) {
 
-            $node.append('<input type="text" value="'+item.layer.options.opacity+'" />');
+            LL[item.name]= item;
             
-            
+            var $node = $('<span class="">');
 
-            $node.find('input').ionRangeSlider({
-                min:0, max:1,
-                to: item.layer.options.opacity
+            var $title = $('<span class="leaflet-panel-layers-title">');
+            $title.append(item.name);
+
+            $node.append($title, '<input class="opacity-slider" type="text" value="'+item.layer.options.opacity+'" />');
+
+            $node.find('.opacity-slider').ionRangeSlider({
+                min: 0.1, max: 1, step: 0.1,
+                from: item.layer.options.opacity,
+                onChange: function (o) {
+                    item.layer.setOpacity(o.from);
+                }
             });
-
-            console.log($node[0]);
 
             return $node[0];
         }*/
@@ -83,6 +89,6 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
         position: 'bottomleft',
         collapsibleGroups: true,
         compact: true
-    }).addTo(map);      
+    }).addTo(map);
 
 });
