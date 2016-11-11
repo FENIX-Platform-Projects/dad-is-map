@@ -9,27 +9,27 @@ var workspace = "forestry",
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
-            {name: 'tree',  colors: "#FFFFFF,#FFEEEE,#FFDDDD,#FFCCCC" },
+            {name: 'tree',  colors: "#bbfbbc,#27db99,#00441b" },
             {name: 'shrub', colors: "#EE0000" },
         //    {name: 'palm',   colors: "" },
         //    {name: 'bamboo', colors: "" },
         //    {name: 'crop',   colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   colors: "#006600", active: true },
-            {name: 'forestland', colors: "" },
-            {name: 'grassland',  colors: "" },
-            {name: 'wetland',    colors: "" },
-            {name: 'settlement', colors: "" },
-            {name: 'otherland',  colors: "" },            
+            {name: 'cropland',   colors: "#504B10", active: true },
+            {name: 'forestland', colors: "336633" },
+            {name: 'grassland',  colors: "66ee66" },
+            {name: 'wetland',    colors: "6666ee" },
+            {name: 'settlement', colors: "1200FD" },
+            {name: 'otherland',  colors: "ffffff" },            
         ],
         'fc': [
-            {name: 'forest',     colors: "" },
-            {name: 'inlandwaterbodies',  colors: "" },
-            {name: 'otherlandwtreecover', colors: "" },
+            {name: 'forest',     colors: "336633" },
+            {name: 'inlandwaterbodies',  colors: "2DECE6" },
+            {name: 'otherlandwtreecover', colors: "89EB32" },
         //  {name: 'unknown',    colors: "" },
-            {name: 'otherland',  colors: "" },  
-            {name: 'otherwoodedland',    colors: "" },            
+            {name: 'otherland',  colors: "ffffff" },  
+            {name: 'otherwoodedland',    colors: "A39813" },            
         ]
     };
 
