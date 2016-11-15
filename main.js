@@ -50,12 +50,12 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
             console.log('zoom', this.getZoom() );
         });
 
-    L.control.panelLayers(null, ConfigPanels.categories.layers, {
+    window.LL = L.control.panelLayers(null, ConfigPanels.categories.layers, {
         title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
         compact: true,
-/*        buildItem: function(item) {
+        buildItem: function(item) {
             
             var $node = $('<span class="">');
 
@@ -66,6 +66,7 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
 
             $node.find('.opacity-slider').ionRangeSlider({
                 min: 0.1, max: 1, step: 0.1,
+                hide_min_max: true, hide_from_to: true,
                 from: item.layer.options.opacity,
                 onChange: function (o) {
                     item.layer.setOpacity(o.from);
@@ -73,10 +74,10 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
             });
 
             return $node[0];
-        }*/
+        }
     }).on('panel:selected', function(layer) {
 
-        console.log( layer.name );
+        //console.log( layer.name );
 
     }).addTo(map);
 

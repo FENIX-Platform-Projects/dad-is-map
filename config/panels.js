@@ -1,8 +1,7 @@
-define(['underscore','handlebars',
-    'leaflet-google','i18n!nls/panels','text!src/html/popup.html'
-], function(_, Handlebars,
-    LeafletGoogle, i18n, popupTmpl) {
+define(['underscore','handlebars','leaflet-google','i18n!nls/panels','text!src/html/popup.html'],
+function(_, Handlebars, LeafletGoogle, i18n, popupTmpl) {
 
+//LAYERS URLS
 var workspace = "forestry",
     geoserverUrl = "http://fenix.fao.org/geoserver29/ows";
 
@@ -10,29 +9,44 @@ var workspace = "forestry",
 var groups = {
         'vc': [
             {name: 'tree',  colors: "#bbfbbc,#27db99,#00441b" },
-            {name: 'shrub', colors: "#EE0000" },
+            {name: 'shrub', colors: "#ee0000" },
         //    {name: 'palm',   colors: "" },
         //    {name: 'bamboo', colors: "" },
         //    {name: 'crop',   colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   colors: "#504B10", active: true },
+            {name: 'cropland',   colors: "#504b10", active: true },
             {name: 'forestland', colors: "#336633" },
             {name: 'grassland',  colors: "#66ee66" },
             {name: 'wetland',    colors: "#6666ee" },
-            {name: 'settlement', colors: "#1200FD" },
+            {name: 'settlement', colors: "#1200fd" },
             {name: 'otherland',  colors: "#ffffff" },            
         ],
         'fc': [
             {name: 'forest',     colors: "#336633" },
-            {name: 'inlandwaterbodies',  colors: "#2DECE6" },
-            {name: 'otherlandwtreecover', colors: "#89EB32" },
+            {name: 'inlandwaterbodies',  colors: "#2dece6" },
+            {name: 'otherlandwtreecover', colors: "#89eb32" },
         //  {name: 'unknown',    colors: "" },
             {name: 'otherland',  colors: "#ffffff" },  
-            {name: 'otherwoodedland',    colors: "#A39813" },            
+            {name: 'otherwoodedland',    colors: "#a39813" },            
         ]
     };
 
+function formatPopup(data) {
+    //TODO replace with: return Handlebars(popupTmpl)(data);
+    return _.compact(_.map(data, function(v, k) {
+        if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
+            return '<em>'+k+':</em> '+v;
+    })).join('<br>');
+}
+
+function formatColors(colors) {
+    return _.reduce(colors.split(','), function(out, c) {
+        return out+'<i class="layer-color" style="background:'+c+'"></i>';
+    },'');
+}
+
+//PANELS
 return {
     categories: {
         title: i18n['panel_categories'],
@@ -44,6 +58,7 @@ return {
                     return {
                         active: layer.active || false,
                         name: i18n[ categoryName+'_'+layer.name ],
+                        icon: formatColors( layer.colors ),
                         layer: {
                             //type: "tileLayer.wms",
                             type: "tileLayer.betterWms",//with GetCapabilities
@@ -54,18 +69,11 @@ return {
                                     transparent: true,
                                     opacity: 1,
                                     formatPopup: function(data) {
-                                        //TODO replace with: return Handlebars(popupTmpl);
-                                        return _.compact(_.map(data, function(v, k) {
-                                            if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
-                                                return '<em>'+k+':</em> '+v;
-                                        })).join('<br>');
+                                        return formatPopup(data)
                                     }
                                 }
                             ]
-                        },
-                        icon: _.reduce(layer.colors.split(','), function(out, c) {
-                            return out+'<i class="layer-color" style="background:'+c+'"></i>';
-                        },'')
+                        }
                     };
                 })
             };
@@ -76,7 +84,7 @@ return {
         layers: [
             {
                 group: i18n['panel_rawlayers'],
-                collapsed: true,
+                collapsed: false,
                 layers: [
                     {
                         name: i18n['panel_rawpoints'],
@@ -119,7 +127,7 @@ return {
                 collapsibleGroups: true,
                 layers: [
                     {
-                        active: true,
+                        //active: true,
                         name: "Google Maps",
                         layer: new L.Google('ROADMAP')
                     },
@@ -134,6 +142,7 @@ return {
                         })
                     },
                     {
+                        active: true,
                         name: "CartoDB Light",
                         layer: {
                             type: "tileLayer",

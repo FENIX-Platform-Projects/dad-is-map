@@ -29,12 +29,15 @@ h2 {
 /* PANELS */
 
 .leaflet-panel-layers {
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.8);
 }
+.leaflet-top.leaflet-right .leaflet-panel-layers-item {
+    height: 40px
+}
+
 .leaflet-panel-layers-overlays .leaflet-panel-layers-item {
     border: 1px solid transparent;
     background: none;
-    min-width: 160px
 }
 .leaflet-panel-layers-group.collapsible .leaflet-panel-layers-icon:first-child {
     font-size: 26px;
@@ -42,7 +45,6 @@ h2 {
 }
 .leaflet-panel-layers-title {
     font-size: 12px;
-
     display: block;
 }
 
@@ -62,10 +64,18 @@ h2 {
     border: none
 }
 
-.leaflet-panel-layers-item .irs-min, .irs-max {
+.leaflet-panel-layers-item .irs-min,
+.leaflet-panel-layers-item .irs-max,
+.leaflet-panel-layers-item .irs-line {
     display: none;
 }
 
 .leaflet-panel-layers-item .irs {
-    max-width: 80%
+    width: 180px;
+    height: 20px;
+    /*visibility: hidden;    */
+}
+
+.leaflet-panel-layers-item:hover .irs {
+    visibility: visible;
 }

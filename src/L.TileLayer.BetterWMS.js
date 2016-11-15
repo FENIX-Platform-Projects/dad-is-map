@@ -12,8 +12,6 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     L.Util.setOptions(this, options || {});
 
     this._formatPopup = this.options.formatPopup || this._defaultFormatPopup;
-    
-    console.log('wmsParams', this.wmsParams);
   },
 
   _defaultFormatPopup: function(data) {
