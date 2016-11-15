@@ -29,12 +29,15 @@ h2 {
 /* PANELS */
 
 .leaflet-panel-layers {
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.4);
 }
 .leaflet-top.leaflet-right .leaflet-panel-layers-item {
-    height: 40px
+    height: 40px;
+    width: 160px;
 }
-
+.leaflet-panel-layers-group {
+    width: 180px
+}
 .leaflet-panel-layers-overlays .leaflet-panel-layers-item {
     border: 1px solid transparent;
     background: none;
@@ -71,7 +74,7 @@ h2 {
 }
 
 .leaflet-panel-layers-item .irs {
-    width: 180px;
+    width: 162px;
     height: 20px;
     /*visibility: hidden;    */
 }

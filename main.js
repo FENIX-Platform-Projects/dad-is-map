@@ -54,7 +54,7 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
         title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
-        compact: true,
+        compact: false,
         buildItem: function(item) {
             
             var $node = $('<span class="">');
