@@ -42,8 +42,8 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
 
     var map = L.map('map', {
     		center: [42,12],
+            maxZoom: 16,
             minZoom: 4,
-            maxZoom: 7,
             zoom: 4
     	})
         .on('zoomend', function() {
