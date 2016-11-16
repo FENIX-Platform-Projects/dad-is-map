@@ -88,6 +88,7 @@ return {
                 layers: [
                     {
                         name: i18n['panel_rawpoints'],
+                        icon: '<i class="layer-color" style="background:#f00;border-radius:10px;height:6px;width:6px;margin:5px"></i>',
                         layer: {
                             type: "tileLayer.wms",
                             args: [ geoserverUrl, {
@@ -102,6 +103,7 @@ return {
                     },
                     {
                         name: i18n['panel_rawpolygons'],
+                        icon: '<i class="layer-color" style="border:1px solid #f00"></i>',
                         layer: {
                             type: "tileLayer.wms",
                             args: [ geoserverUrl, {
@@ -109,7 +111,7 @@ return {
                                     layers: workspace+':all',
                                     format: "image/png",
                                     transparent: true,
-                                    opacity: 0.6
+                                    opacity: 0.8
                                 }
                             ]
                         }
@@ -134,7 +136,7 @@ return {
                     {
                         name: "Google Satellite",
                         layer: new L.Google('SAT')
-                    },                    
+                    },
                     {
                         name: "Open Street Map",
                         layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

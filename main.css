@@ -53,8 +53,8 @@ h2 {
 }
 
 .leaflet-panel-layers-icon {
-    background: #eee;
-    border: 1px solid #ddd;
+    background: none;
+    border: none;
     width: auto;
     height: 16px;
     padding: 0;
@@ -63,8 +63,8 @@ h2 {
 }
 .leaflet-panel-layers-item .layer-color {
     display: inline-block;
-    height: 16px;
-    width: 16px;
+    height: 14px;
+    width: 14px;
     border: none
 }
 
