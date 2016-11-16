@@ -92,8 +92,8 @@ return {
                         layer: {
                             type: "tileLayer.wms",
                             args: [ geoserverUrl, {
-                                    styles: "global_land_trend_all",
-                                    layers: workspace+':'+'global_land_trend',
+                                    styles: "all_points",
+                                    layers: workspace+':'+'fenix_global_land_trends_points',
                                     format: "image/png",
                                     transparent: true,
                                     attribution: i18n['attribution_raw']
@@ -108,7 +108,7 @@ return {
                             type: "tileLayer.wms",
                             args: [ geoserverUrl, {
                                     styles: "all_borders",
-                                    layers: workspace+':all',
+                                    layers: workspace+':crossview_world',
                                     format: "image/png",
                                     transparent: true,
                                     opacity: 0.8
