@@ -32,8 +32,9 @@ h2 {
     background: rgba(255,255,255,0.4);
 }
 .leaflet-top.leaflet-right .leaflet-panel-layers-item {
+    padding: 0;    
     height: 40px;
-    width: 160px;
+    width: 170px;
 }
 .leaflet-panel-layers-group {
     width: 180px
@@ -74,7 +75,7 @@ h2 {
 }
 
 .leaflet-panel-layers-item .irs {
-    width: 162px;
+    width: 171px;
     height: 20px;
     /*visibility: hidden;    */
 }
