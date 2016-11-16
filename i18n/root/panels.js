@@ -1,4 +1,3 @@
-/*global define*/
 define({
     "panel_categories": "Categories",
     "panel_baselayers": "Base Layers",

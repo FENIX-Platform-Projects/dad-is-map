@@ -1,5 +1,13 @@
-define(['underscore','handlebars','leaflet-google','i18n!nls/panels','text!src/html/popup.html'],
-function(_, Handlebars, LeafletGoogle, i18n, popupTmpl) {
+define(['underscore','handlebars','leaflet-google',
+    'i18n!nls/panels',
+    'i18n!nls/popups',
+    'text!src/html/popup.html'
+],
+function(_,Handlebars,LeafletGoogle,
+    i18nPanels,
+    i18nPopups,
+    tmplPopup
+) {
 
 //LAYERS URLS
 var workspace = "forestry",
@@ -10,9 +18,9 @@ var groups = {
         'vc': [
             {name: 'tree',  colors: "#bbfbbc,#27db99,#00441b" },
             {name: 'shrub', colors: "#ee0000" },
-        //    {name: 'palm',   colors: "" },
-        //    {name: 'bamboo', colors: "" },
-        //    {name: 'crop',   colors: "" },
+        //  {name: 'palm',   colors: "" },
+        //  {name: 'bamboo', colors: "" },
+        //  {name: 'crop',   colors: "" },
         ],
         'lu': [
             {name: 'cropland',   colors: "#f09e4d", active: true },
@@ -33,11 +41,17 @@ var groups = {
     };
 
 function formatPopup(data) {
-    //TODO replace with: return Handlebars(popupTmpl)(data);
-    return _.compact(_.map(data, function(v, k) {
+    /*return _.compact(_.map(data, function(v, k) {
         if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
             return '<em>'+k+':</em> '+v;
-    })).join('<br>');
+    })).join('<br>');*/
+    return Handlebars.compile(tmplPopup)({
+        fields: _.map(data, function(v, k) {
+            console.log(k, i18nPopups[ k ])
+            if(k!='id')
+            return {label: i18nPopups[ k ], value: v };
+        })
+    });
 }
 
 function formatColors(colors) {
@@ -49,15 +63,15 @@ function formatColors(colors) {
 //PANELS
 return {
     categories: {
-        title: i18n['panel_categories'],
+        title: i18nPanels['panel_categories'],
         layers: _.map(groups, function(layers, categoryName) {
             return {
                 collapsed: false,
-                group: i18n[ categoryName ],
+                group: i18nPanels[ categoryName ],
                 layers: _.map(layers, function(layer, i) {
                     return {
                         active: layer.active || false,
-                        name: i18n[ categoryName+'_'+layer.name ],
+                        name: i18nPanels[ categoryName+'_'+layer.name ],
                         icon: formatColors( layer.colors ),
                         layer: {
                             //type: "tileLayer.wms",
@@ -83,11 +97,11 @@ return {
     rawlayers: {
         layers: [
             {
-                group: i18n['panel_rawlayers'],
+                group: i18nPanels['panel_rawlayers'],
                 collapsed: false,
                 layers: [
                     {
-                        name: i18n['panel_rawpoints'],
+                        name: i18nPanels['panel_rawpoints'],
                         icon: '<i class="layer-color" style="background:#f00;border-radius:10px;height:6px;width:6px;margin:5px"></i>',
                         layer: {
                             type: "tileLayer.wms",
@@ -96,13 +110,13 @@ return {
                                     layers: workspace+':'+'fenix_global_land_trends_points',
                                     format: "image/png",
                                     transparent: true,
-                                    attribution: i18n['attribution_raw']
+                                    attribution: i18nPanels['attribution_raw']
                                 }
                             ]
                         }
                     },
                     {
-                        name: i18n['panel_rawpolygons'],
+                        name: i18nPanels['panel_rawpolygons'],
                         icon: '<i class="layer-color" style="border:1px solid #f00"></i>',
                         layer: {
                             type: "tileLayer.wms",
@@ -124,7 +138,7 @@ return {
     baselayers: {
         layers: [
             {
-                group: i18n['panel_baselayers'],
+                group: i18nPanels['panel_baselayers'],
                 collapsed: false,
                 collapsibleGroups: true,
                 layers: [
