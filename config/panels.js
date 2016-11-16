@@ -15,12 +15,12 @@ var groups = {
         //    {name: 'crop',   colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   colors: "#504b10", active: true },
-            {name: 'forestland', colors: "#336633" },
-            {name: 'grassland',  colors: "#66ee66" },
-            {name: 'wetland',    colors: "#6666ee" },
-            {name: 'settlement', colors: "#1200fd" },
-            {name: 'otherland',  colors: "#ffffff" },            
+            {name: 'cropland',   colors: "#f09e4d", active: true },
+            {name: 'forestland', colors: "#418d46" },
+            {name: 'grassland',  colors: "#b3dd71" },
+            {name: 'wetland',    colors: "#ccecf8" },
+            {name: 'settlement', colors: "#d1463f" },
+            {name: 'otherland',  colors: "#e1e1e1" },            
         ],
         'fc': [
             {name: 'forest',     colors: "#336633" },
