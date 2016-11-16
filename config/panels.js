@@ -31,12 +31,12 @@ var groups = {
             {name: 'otherland',  colors: "#e1e1e1" },            
         ],
         'fc': [
-            {name: 'forest',     colors: "#336633" },
-            {name: 'inlandwaterbodies',  colors: "#2dece6" },
-            {name: 'otherlandwtreecover', colors: "#89eb32" },
+            {name: 'forest',     colors: "#31a354" },
+            {name: 'inlandwaterbodies',  colors: "#a6bddb" },
+            {name: 'otherlandwtreecover', colors: "#fce747" },
         //  {name: 'unknown',    colors: "" },
-            {name: 'otherland',  colors: "#ffffff" },  
-            {name: 'otherwoodedland',    colors: "#a39813" },            
+            {name: 'otherland',  colors: "#e5f5e0" },  
+            {name: 'otherwoodedland',    colors: "#addd8e" },            
         ]
     };
 
