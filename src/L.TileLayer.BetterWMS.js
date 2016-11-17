@@ -29,7 +29,7 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       fill: false,
       weight: 3,
       opacity: 1,
-      color: '#f0c'
+      color: '#c0f'
     })
     .addTo(map);
 
@@ -69,28 +69,33 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   getFeatureInfoUrl: function (latlng) {
     // Construct a GetFeatureInfo request URL given a point
     var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
-        size = this._map.getSize(),
-        
-        params = {
-          request: 'GetFeatureInfo',
-          service: 'WMS',
-          srs: 'EPSG:4326',
-          styles: this.wmsParams.styles,
-          transparent: this.wmsParams.transparent,
-          version: this.wmsParams.version,      
-          format: this.wmsParams.format,
-          bbox: this._map.getBounds().toBBoxString(),
-          height: size.y,
-          width: size.x,
-          layers: this.wmsParams.layers,
-          query_layers: this.wmsParams.layers,
-          format_options: 'callback: getJson',
-          info_format: 'text/javascript'
-        };
-    
+      size = this._map.getSize(),
+      mbbox = this._map.getBounds();
+
+    var sw = this._map.options.crs.project(mbbox.getSouthWest()),
+      ne = this._map.options.crs.project(mbbox.getNorthEast());
+      bbox = sw.x +','+ sw.y +','+ ne.x +','+ ne.y;
+
+    params = {
+      request: 'GetFeatureInfo',
+      service: 'WMS',
+      srs: this.wmsParams.srs,
+      styles: this.wmsParams.styles,
+      transparent: this.wmsParams.transparent,
+      version: this.wmsParams.version,      
+      format: this.wmsParams.format,
+      bbox: bbox,
+      height: size.y,
+      width: size.x,
+      layers: this.wmsParams.layers,
+      query_layers: this.wmsParams.layers,
+      format_options: 'callback: getJson',
+      info_format: 'text/javascript'
+      };
+    //TODO rename srs to crs for version 1.3.0
     params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
     params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
-    
+
     return this._url + L.Util.getParamString(params, this._url, true);
   },
   
@@ -103,7 +108,10 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       this._geoLayer.clearLayers();
       this._geoLayer.addData(data);
 
-      L.popup({maxWidth: 800 })
+      L.popup({
+        offset: L.point(0,-8),
+        maxWidth: 800
+      })
         .setLatLng(latlng)
         .setContent(content)
         .openOn(this._map);

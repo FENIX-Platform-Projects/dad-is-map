@@ -1,17 +1,15 @@
 define(['underscore','handlebars','leaflet-google',
+    'config/config',
     'i18n!nls/panels',
     'i18n!nls/popups',
     'text!src/html/popup.html'
 ],
 function(_,Handlebars,LeafletGoogle,
+    Config,
     i18nPanels,
     i18nPopups,
     tmplPopup
 ) {
-
-//LAYERS URLS
-var workspace = "forestry",
-    geoserverUrl = "http://fenix.fao.org/geoserver29/ows";
 
 //LAYERS CATEGORIES
 var groups = {
@@ -41,17 +39,12 @@ var groups = {
     };
 
 function formatPopup(data) {
-    return _.compact(_.map(data, function(v, k) {
-        if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
-            return '<em>'+k+':</em> '+v;
-    })).join('<br>');
-/*    return Handlebars.compile(tmplPopup)({
+    //ALL ATTRIBUTES return _.compact(_.map(data, function(v, k) { return '<em>'+k+':</em> '+v; })).join('<br>');
+    return Handlebars.compile(tmplPopup)({
         fields: _.map(data, function(v, k) {
-            console.log(k, i18nPopups[ k ])
-            if(k!='id')
-            return {label: i18nPopups[ k ], value: v };
+            return i18nPopups[ k ] && {label: i18nPopups[ k ], value: v };
         })
-    });*/
+    });
 }
 
 function formatColors(colors) {
@@ -76,9 +69,9 @@ return {
                         layer: {
                             //type: "tileLayer.wms",
                             type: "tileLayer.betterWms",//with GetCapabilities
-                            args: [ geoserverUrl, {
+                            args: [ Config.geoserverUrl, {
                                     styles: categoryName+'_'+layer.name,
-                                    layers: workspace+':'+categoryName+'_'+layer.name,
+                                    layers: Config.workspace+':'+categoryName+'_'+layer.name,
                                     format: "image/png8",
                                     transparent: true,
                                     opacity: 1,
@@ -105,9 +98,9 @@ return {
                         icon: '<i class="layer-color" style="background:#f00;border-radius:10px;height:6px;width:6px;margin:5px"></i>',
                         layer: {
                             type: "tileLayer.wms",
-                            args: [ geoserverUrl, {
+                            args: [ Config.geoserverUrl, {
                                     styles: "all_points",
-                                    layers: workspace+':'+'fenix_global_land_trends_points',
+                                    layers: Config.workspace+':'+'fenix_global_land_trends_points',
                                     format: "image/png",
                                     transparent: true,
                                     attribution: i18nPanels['attribution_raw']
@@ -120,9 +113,9 @@ return {
                         icon: '<i class="layer-color" style="border:1px solid #f00"></i>',
                         layer: {
                             type: "tileLayer.wms",
-                            args: [ geoserverUrl, {
+                            args: [ Config.geoserverUrl, {
                                     styles: "all_borders",
-                                    layers: workspace+':crossview_world',
+                                    layers: Config.workspace+':crossview_world',
                                     format: "image/png",
                                     transparent: true,
                                     opacity: 0.8
