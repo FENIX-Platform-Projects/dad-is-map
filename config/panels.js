@@ -1,15 +1,8 @@
 define(['underscore','handlebars','leaflet-google',
-    'config/config',
-    'i18n!nls/panels',
-    'i18n!nls/popups',
-    'text!src/html/popup.html'
+    'config/config','i18n!nls/panels','i18n!nls/popups','text!src/html/popup.html'
 ],
 function(_,Handlebars,LeafletGoogle,
-    Config,
-    i18nPanels,
-    i18nPopups,
-    tmplPopup
-) {
+    Config,i18nPanels,i18nPopups,tmplPopup) {
 
 //LAYERS CATEGORIES
 var groups = {
@@ -21,9 +14,9 @@ var groups = {
         //  {name: 'crop',   active: 0, colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   active: 0, colors: "#f09e4d" },
+            {name: 'cropland',   active: 1, colors: "#f09e4d" },
             {name: 'forestland', active: 0, colors: "#418d46" },
-            {name: 'grassland',  active: 1, colors: "#b3dd71" },
+            {name: 'grassland',  active: 0, colors: "#b3dd71" },
             {name: 'wetland',    active: 0, colors: "#ccecf8" },
             {name: 'settlement', active: 0, colors: "#d1463f" },
             {name: 'otherland',  active: 0, colors: "#e1e1e1" },            
@@ -54,25 +47,27 @@ function formatColors(colors) {
 }
 
 //PANELS
+var panelZindex = 0;
 return {
     categories: {
         title: i18nPanels['panel_categories'],
-        layers: _.map(groups, function(layers, categoryName) {
+        layers: _.map(groups, function(layers, category) {
             return {
                 collapsed: false,
-                group: i18nPanels[ categoryName ],
+                group: i18nPanels[ category ],
                 layers: _.map(layers, function(layer, i) {
                     return {
                         active: layer.active || false,
-                        name: i18nPanels[ categoryName+'_'+layer.name ],
+                        name: i18nPanels[ category+'_'+layer.name ],
                         icon: formatColors( layer.colors ),
                         layer: {
                             //type: "tileLayer.wms",
                             type: "tileLayer.betterWms",//with GetCapabilities
                             args: [ Config.geoserverUrl, {
+                                    zIndex: (panelZindex++)+100,
                                     srs: Config.map.crs,
-                                    styles: categoryName+'_'+layer.name,
-                                    layers: Config.workspace+':'+categoryName+'_'+layer.name,
+                                    styles: category+'_'+layer.name,
+                                    layers: Config.workspace+':'+category+'_'+layer.name,
                                     format: "image/png8",
                                     transparent: true,
                                     opacity: 1,
@@ -100,6 +95,7 @@ return {
                         layer: {
                             type: "tileLayer.wms",
                             args: [ Config.geoserverUrl, {
+                                    zIndex: (panelZindex++)+1000,
                                     styles: "all_points",
                                     layers: Config.workspace+':'+'fenix_global_land_trends_points',
                                     format: "image/png",
@@ -115,6 +111,7 @@ return {
                         layer: {
                             type: "tileLayer.wms",
                             args: [ Config.geoserverUrl, {
+                                    zIndex: (panelZindex++)+1000,
                                     styles: "all_borders",
                                     layers: Config.workspace+':crossview_world',
                                     format: "image/png",
@@ -139,25 +136,25 @@ return {
                     {
                         //active: true,
                         name: "Google Maps",
-                        layer: new L.Google('ROADMAP')
+                        layer: new L.Google('ROADMAP', {
+                            zIndex: panelZindex++,
+                        })
                     },
                     {
-                        name: "Google Satellite",
-                        layer: new L.Google('SAT')
-                    },
-                    {
+                        active: true,                        
                         name: "Open Street Map",
                         layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            zIndex: panelZindex++,
                             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         })
                     },
                     {
-                        active: true,
                         name: "CartoDB Light",
                         layer: {
                             type: "tileLayer",
                             args: [
                                 "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png", {
+                                    zIndex: panelZindex++,
                                     attribution: '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                                     subdomains: 'abcd',
                                     maxZoom: 19
@@ -171,6 +168,7 @@ return {
                             type: "tileLayer",
                             args: [
                                 "http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png", {
+                                    zIndex: panelZindex++,
                                     attribution: '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                                     subdomains: 'abcd',
                                     maxZoom: 19,
