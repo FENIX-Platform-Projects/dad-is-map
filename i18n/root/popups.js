@@ -1,6 +1,6 @@
 define({
-	"id": "",
-	"public_id": 			"Id",
+	"id": 					"",
+	"public_id": 			"Public Id",
 	"location_x": 			"Longitude",
 	"location_y": 			"Latitude",
 	"land_use_category":	"Land Use",

@@ -15,7 +15,8 @@ require.config({
         'bootstrap':              FX_CDN+"bootstrap/3.3.7/js/bootstrap.min",
         'ion-rangeslider':        FX_CDN+"ion.rangeSlider/2.1.2/js/ion-rangeSlider/ion.rangeSlider",
         'leaflet':                FX_CDN+"leaflet/0.7.7/leaflet-src",
-        'leaflet-google':         FX_CDN+"leaflet/plugins/Google",
+        //'leaflet-google':         FX_CDN+"leaflet/plugins/Google",
+        'leaflet-google':         "src/Google",
 
         'leaflet-panel': "node_modules/leaflet-panel-layers/src/leaflet-panel-layers",
         'leaflet-betterwms': "src/L.TileLayer.BetterWMS",
@@ -34,23 +35,32 @@ require.config({
 
 require(['jquery','underscore','handlebars', 'ion-rangeslider', 
     'leaflet', 'leaflet-panel', 'leaflet-betterwms', 
+    'config',
     'config/panels'
 ], function($, _, Handlebars, Rangeslider,
     L, LeafletPanel, LeafletBetterWMS, 
+    Config,
     ConfigPanels
 ) {
 
-    var map = L.map('map', {
+    window.map = L.map('map', {
+            
+            crs: L.CRS[ Config.map.crs.replace(':','') ],
+            //crs: L.CRS.EPSG3857,
+
     		center: [42,12],
             maxZoom: 16,
-            minZoom: 4,
+            //minZoom: 4,
             zoom: 4
     	})
         .on('zoomend', function() {
             console.log('zoom', this.getZoom() );
-        });
+        })
+        .on('overlayadd', function(e) {
+            console.log('overlayadd', e.layer.wmsParams );  
+        })
 
-    window.LL = L.control.panelLayers(null, ConfigPanels.categories.layers, {
+    window.panel = L.control.panelLayers(null, ConfigPanels.categories.layers, {
         title: ConfigPanels.categories.title,
         position: 'topright',
         collapsibleGroups: true,
