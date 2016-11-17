@@ -14,27 +14,27 @@ function(_,Handlebars,LeafletGoogle,
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
-            {name: 'tree',  colors: "#d5efcf,#9ed898,#54b567,#1d8641,#00441b" },
-            {name: 'shrub', colors: "#fff5eb,#fed2a6,#fd9243,#df4f05,#7f2704" },
-        //  {name: 'palm',   colors: "" },
-        //  {name: 'bamboo', colors: "" },
-        //  {name: 'crop',   colors: "" },
+            {name: 'tree',   active: 1, colors: "#d5efcf,#9ed898,#54b567,#1d8641,#00441b" },
+            {name: 'shrub',  active: 0, colors: "#fff5eb,#fed2a6,#fd9243,#df4f05,#7f2704" },
+        //  {name: 'palm',   active: 0, colors: "" },
+        //  {name: 'bamboo', active: 0, colors: "" },
+        //  {name: 'crop',   active: 0, colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   colors: "#f09e4d", active: true },
-            {name: 'forestland', colors: "#418d46" },
-            {name: 'grassland',  colors: "#b3dd71" },
-            {name: 'wetland',    colors: "#ccecf8" },
-            {name: 'settlement', colors: "#d1463f" },
-            {name: 'otherland',  colors: "#e1e1e1" },            
+            {name: 'cropland',   active: 0, colors: "#f09e4d" },
+            {name: 'forestland', active: 0, colors: "#418d46" },
+            {name: 'grassland',  active: 1, colors: "#b3dd71" },
+            {name: 'wetland',    active: 0, colors: "#ccecf8" },
+            {name: 'settlement', active: 0, colors: "#d1463f" },
+            {name: 'otherland',  active: 0, colors: "#e1e1e1" },            
         ],
         'fc': [
-            {name: 'forest',     colors: "#31a354" },
-            {name: 'inlandwaterbodies',  colors: "#a6bddb" },
-            {name: 'otherlandwtreecover', colors: "#fce747" },
-        //  {name: 'unknown',    colors: "" },
-            {name: 'otherland',  colors: "#e5f5e0" },  
-            {name: 'otherwoodedland',    colors: "#addd8e" },            
+            {name: 'forest',             active: 0, colors: "#31a354" },
+            {name: 'inlandwaterbodies',  active: 0, colors: "#a6bddb" },
+            {name: 'otherlandwtreecover',active: 0, colors: "#fce747" },
+            {name: 'otherland',          active: 0, colors: "#e5f5e0" },  
+            {name: 'otherwoodedland',    active: 0, colors: "#addd8e" }, 
+        //  {name: 'unknown',    active: 0, colors: "" },
         ]
     };
 
@@ -70,6 +70,7 @@ return {
                             //type: "tileLayer.wms",
                             type: "tileLayer.betterWms",//with GetCapabilities
                             args: [ Config.geoserverUrl, {
+                                    srs: Config.map.crs,
                                     styles: categoryName+'_'+layer.name,
                                     layers: Config.workspace+':'+categoryName+'_'+layer.name,
                                     format: "image/png8",
@@ -159,7 +160,7 @@ return {
                                 "http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png", {
                                     attribution: '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
                                     subdomains: 'abcd',
-                                    maxZoom: 19,
+                                    maxZoom: 19
                                 }
                             ]
                         }

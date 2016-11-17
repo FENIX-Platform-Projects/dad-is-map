@@ -47,7 +47,7 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
             crs: L.CRS[ Config.map.crs.replace(':','') ],
     		center: [42,12],
             maxZoom: 16,
-            minZoom: 4,
+            //minZoom: 4,
             zoom: 4
     	})
         .on('zoomend', function() {
@@ -92,8 +92,8 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
     }).addTo(map);
 
     L.control.panelLayers(
-        ConfigPanels.baselayers.layers,
-        //null,
+        //ConfigPanels.baselayers.layers,
+        null,
         ConfigPanels.rawlayers.layers
         , {
         title: ConfigPanels.rawlayers.title,
