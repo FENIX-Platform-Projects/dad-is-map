@@ -41,17 +41,17 @@ var groups = {
     };
 
 function formatPopup(data) {
-    /*return _.compact(_.map(data, function(v, k) {
+    return _.compact(_.map(data, function(v, k) {
         if(v && !_.isNumber(v) && !_.isBoolean(v) && _.isString(v) && v!=='na')
             return '<em>'+k+':</em> '+v;
-    })).join('<br>');*/
-    return Handlebars.compile(tmplPopup)({
+    })).join('<br>');
+/*    return Handlebars.compile(tmplPopup)({
         fields: _.map(data, function(v, k) {
             console.log(k, i18nPopups[ k ])
             if(k!='id')
             return {label: i18nPopups[ k ], value: v };
         })
-    });
+    });*/
 }
 
 function formatColors(colors) {

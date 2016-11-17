@@ -2,6 +2,6 @@ define({
 	workspace: "forestry",
     geoserverUrl: "http://fenix.fao.org/geoserver29/ows",
 	map: {
-		crs: 
+		crs: 'EPSG:3857'
 	}	
 });
