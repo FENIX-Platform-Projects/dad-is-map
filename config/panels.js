@@ -16,8 +16,8 @@ var workspace = "forestry",
 //LAYERS CATEGORIES
 var groups = {
         'vc': [
-            {name: 'tree',  colors: "#bbfbbc,#27db99,#00441b" },
-            {name: 'shrub', colors: "#ee0000" },
+            {name: 'tree',  colors: "#d5efcf,#9ed898,#54b567,#1d8641,#00441b" },
+            {name: 'shrub', colors: "#fff5eb,#fed2a6,#fd9243,#df4f05,#7f2704" },
         //  {name: 'palm',   colors: "" },
         //  {name: 'bamboo', colors: "" },
         //  {name: 'crop',   colors: "" },
