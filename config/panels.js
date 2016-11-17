@@ -8,14 +8,14 @@ function(_,Handlebars,LeafletGoogle,
 var groups = {
         'vc': [
             {name: 'tree',   active: 1, colors: "#d5efcf,#9ed898,#54b567,#1d8641,#00441b" },
-            {name: 'shrub',  active: 0, colors: "#fff5eb,#fed2a6,#fd9243,#df4f05,#7f2704" },
+            {name: 'shrub',  active: 1, colors: "#fff5eb,#fed2a6,#fd9243,#df4f05,#7f2704" },
         //  {name: 'palm',   active: 0, colors: "" },
         //  {name: 'bamboo', active: 0, colors: "" },
         //  {name: 'crop',   active: 0, colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   active: 1, colors: "#f09e4d" },
-            {name: 'forestland', active: 0, colors: "#418d46" },
+            {name: 'cropland',   active: 0, colors: "#f09e4d" },
+            {name: 'forestland', active: 1, colors: "#418d46" },
             {name: 'grassland',  active: 0, colors: "#b3dd71" },
             {name: 'wetland',    active: 0, colors: "#ccecf8" },
             {name: 'settlement', active: 0, colors: "#d1463f" },

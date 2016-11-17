@@ -42,13 +42,14 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
 ) {
 
     window.map = L.map('map', {
+            doubleClickZoom: false,
             crs: L.CRS[ Config.map.crs.replace(':','') ],
     		center: [42,12],
             maxZoom: 16,
             minZoom: 4,
-            zoom: 4
+            zoom: 5
     	})
-        .on('zoomend', function() {
+/*        .on('zoomend', function() {
             console.log('zoom', this.getZoom() );
         })
         .on('overlayadd', function(e) {
@@ -56,7 +57,7 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
         })
         .on('baselayerchange', function(e) {
             console.log('baselayerchange', e.layer );  
-        })
+        })*/
 
 
     L.control.panelLayers(
