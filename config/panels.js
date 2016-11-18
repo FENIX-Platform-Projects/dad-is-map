@@ -14,7 +14,7 @@ var groups = {
         //  {name: 'crop',   active: 0, colors: "" },
         ],
         'lu': [
-            {name: 'forestland', active: 1, colors: "#418d46" },
+            {name: 'forestland', active: 0, colors: "#418d46" },
             {name: 'cropland',   active: 0, colors: "#f09e4d" },
             {name: 'grassland',  active: 0, colors: "#b3dd71" },
             {name: 'wetland',    active: 0, colors: "#ccecf8" },
