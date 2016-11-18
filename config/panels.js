@@ -14,8 +14,8 @@ var groups = {
         //  {name: 'crop',   active: 0, colors: "" },
         ],
         'lu': [
-            {name: 'cropland',   active: 0, colors: "#f09e4d" },
             {name: 'forestland', active: 1, colors: "#418d46" },
+            {name: 'cropland',   active: 0, colors: "#f09e4d" },
             {name: 'grassland',  active: 0, colors: "#b3dd71" },
             {name: 'wetland',    active: 0, colors: "#ccecf8" },
             {name: 'settlement', active: 0, colors: "#d1463f" },
@@ -23,10 +23,10 @@ var groups = {
         ],
         'fc': [
             {name: 'forest',             active: 0, colors: "#31a354" },
-            {name: 'inlandwaterbodies',  active: 0, colors: "#a6bddb" },
+            {name: 'otherwoodedland',    active: 0, colors: "#addd8e" }, 
             {name: 'otherlandwtreecover',active: 0, colors: "#fce747" },
             {name: 'otherland',          active: 0, colors: "#e5f5e0" },  
-            {name: 'otherwoodedland',    active: 0, colors: "#addd8e" }, 
+            {name: 'inlandwaterbodies',  active: 0, colors: "#a6bddb" },
         //  {name: 'unknown',    active: 0, colors: "" },
         ]
     };
@@ -134,14 +134,14 @@ return {
                 collapsibleGroups: true,
                 layers: [
                     {
-                        //active: true,
+                        active: true,
                         name: "Google Maps",
                         layer: new L.Google('ROADMAP', {
                             zIndex: panelZindex++,
                         })
                     },
                     {
-                        active: true,                        
+                        //active: true,                        
                         name: "Open Street Map",
                         layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             zIndex: panelZindex++,

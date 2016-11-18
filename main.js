@@ -45,7 +45,7 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
             doubleClickZoom: false,
             crs: L.CRS[ Config.map.crs.replace(':','') ],
     		center: [42,12],
-            maxZoom: 16,
+            maxZoom: 12,
             minZoom: 4,
             zoom: 5
     	})
@@ -97,9 +97,10 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
 
             return $node[0];
         }
-    }).on('panel:selected', function(layer) {
-        console.log( layer );
     }).addTo(map);
+    /*.on('panel:selected', function(layer) {
+        console.log( layer );
+    })*/
 
 
 });
