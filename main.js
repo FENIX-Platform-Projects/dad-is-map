@@ -42,6 +42,7 @@ require(['jquery','underscore','handlebars', 'ion-rangeslider',
 ) {
 
     window.map = L.map('map', {
+            attributionControl: false,
             doubleClickZoom: false,
             crs: L.CRS[ Config.map.crs.replace(':','') ],
     		center: [42,12],
