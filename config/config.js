@@ -1,5 +1,5 @@
 define({
-	workspace: "forestry",
+	workspace: "dadis",
     geoserverUrl: "http://fenix.fao.org/geoserver29/ows",
 	map: {
 		crs: 'EPSG:3857'
